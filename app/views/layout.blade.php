@@ -14,7 +14,7 @@
     {{ HTML::style('css/bootstrap.min.css') }}
 
     <!-- Custom styles for this template -->
-    {{ HTML::style('css/jumbotron.css') }}
+    {{ HTML::style('css/starter-template.css') }}
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -39,30 +39,22 @@
           </button>
           <a class="navbar-brand" href="#">Initech</a>
         </div>
-        <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <button class="btn btn-danger" type="submit">Sign out</button>
           </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        @yield('jumbotron')
+        </div><!--/.nav-collapse -->
       </div>
     </div>
 
     <div class="container">
       @yield('container')
-    </div> <!-- /container -->
+    </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript
@@ -70,5 +62,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     {{ HTML::script('js/jquery.min.js') }}
     {{ HTML::script('js/bootstrap.min.js') }}
+    {{ HTML::script('js/initech-ajax.js') }}
   </body>
 </html>

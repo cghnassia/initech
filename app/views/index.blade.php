@@ -1,34 +1,22 @@
 @extends('layout')
 
-@section('jumbotron')
-	<h1>Hello, world!</h1>
-    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-     <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
-@stop
-
 @section('container')
-	<!-- Example row of columns -->
-  <div class="row">
-    <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+  <div class="starter-template">
+    <!--<h1>Bootstrap starter template</h1>
+    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>-->
+
+    <input type="text" class="form-control" id="sort-input" placeholder="Enter numbers separated by comma">
+
+    <div class="progress progress-striped active">
+      <div class="progress-bar" role="progressbar" arial-valuebow="45", aria-valuemin="0" aria-valuemax="100" style="width:45%;"> </div>
+      <!--<span clas="sr-only">45% Complete</span>-->
     </div>
-    <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-   </div>
-    <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+
+    <div class="" id="sort-output">
     </div>
   </div>
-
-  <hr>
-
-  <footer>
+  	
+  <!--<footer>
     <p>&copy; Company 2014</p>
-  </footer>
+  </footer>-->
 @stop

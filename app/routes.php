@@ -17,4 +17,6 @@
 });*/
 
 Route::get('/', 'HomeController@showIndex');
+Route::post('/sort/', 'HomeController@showSort');
+Route::get('/test/', 'HomeController@testBubble');
 
