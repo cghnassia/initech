@@ -50,6 +50,7 @@
           </ul>
           <form class="navbar-form navbar-right" action="/logout">
             <?php if($authenticated) { ?>
+            <p class="navbar-text">Hello {{ $username }} </p>
             <button class="btn btn-danger" type="submit">Sign out</button>
             <?php } ?>
           </form>

@@ -4,6 +4,8 @@ class AuthController extends BaseController {
 
 	
 	public function doLogin() {
+
+
 		if (Request::isMethod('post')) {
 
 			$username = Request::get('username');
@@ -11,12 +13,22 @@ class AuthController extends BaseController {
 			$remember = Request::get('remember');
 
 			if (Auth::attempt(array('username' => $username, 'password' => $password), $remember)) {
-				return Redirect::to('/');
+				//return Redirect::to('/');
+				$status = true;
 			}
+			else {
+				$status = false;
+			}
+
+
+			return Response::json(array(
+				'status' => $status
+			));
 		}
 		else {
 			return View::make('login', array('authenticated' => Auth::check()));
 		}
+
 	}
 
 	public function doLogout() {

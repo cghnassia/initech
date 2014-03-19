@@ -14,10 +14,15 @@
 
     <h2 class="form-signin-heading">Please sign in</h2>
 
-    <div class="alert alert-danger alert-error">
+    <div class="alert alert-danger alert-error" id="login-error">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>Incorrect Username or Password!</strong> .
     </div>
+
+    <div class="alert alert-success" id="login-success">  
+        <a class="close" data-dismiss="alert">×</a>  
+        <strong>Authentication Success. You are going to be redirected</strong>
+    </div>  
 
     <input type="text" id="username" class="form-control" name="username" placeholder="Username" autofocus="" required="" />
     <input type="password" id="password" class="form-control" name="password" placeholder="Password" autofocus="" required=""/>
