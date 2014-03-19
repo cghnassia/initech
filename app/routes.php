@@ -16,7 +16,12 @@
 	#return View::make('hello');
 });*/
 
-Route::get('/', 'HomeController@showIndex');
-Route::post('/sort/', 'HomeController@showSort');
-Route::get('/test/', 'HomeController@testBubble');
+Route::get('/', 'HomeController@showIndex')->before('auth');
+Route::post('sort', 'HomeController@showSort')->before('auth');
+
+Route::get('login', array('as' => 'login', 'uses' => 'AuthController@doLogin'))->before('guest');
+Route::post('login', array('as' => 'login', 'uses' => 'AuthController@doLogin'))->before('guest');
+
+Route::get('logout', 'AuthController@doLogout')->before('auth');
+//Route::get('/test/', 'HomeController@testBubble');
 

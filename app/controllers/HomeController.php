@@ -41,7 +41,7 @@ class HomeController extends BaseController {
 
 	public function showIndex() {
 
-		return View::make('index');
+		return View::make('index', array('authenticated' => Auth::check()));
 	}
 
 	public function showSort() {

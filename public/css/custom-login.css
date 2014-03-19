@@ -1,0 +1,17 @@
+.form-signin{
+	padding-top: 65px; 
+	max-width: 350px; 
+	margin:auto; float:none;
+}
+
+.form-signin input{
+	margin-bottom:10px;
+}
+
+.form-signin .alert {
+	display:none;
+}
+
+body {
+	background-color: #EEE; }
+}

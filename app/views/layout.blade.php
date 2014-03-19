@@ -16,6 +16,9 @@
     <!-- Custom styles for this template -->
     {{ HTML::style('css/starter-template.css') }}
 
+    <!-- My stylesheet for this file-->
+    @yield('head')
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -45,17 +48,22 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right" action="/logout">
+            <?php if($authenticated) { ?>
             <button class="btn btn-danger" type="submit">Sign out</button>
+            <?php } ?>
           </form>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
     <div class="container">
-      @yield('container')
+        @yield('container')
     </div><!-- /.container -->
 
+    <div class="footer">
+        © Initech 2014
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -63,5 +71,6 @@
     {{ HTML::script('js/jquery.min.js') }}
     {{ HTML::script('js/bootstrap.min.js') }}
     {{ HTML::script('js/initech-ajax.js') }}
+
   </body>
 </html>
