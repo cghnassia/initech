@@ -65,7 +65,21 @@ class HomeController extends BaseController {
 				$numbers[$i] = intval($numbers[$i]);	
 			}
 
+			//no we check if the user has already sorted something
+			/*if(Session::has('numbers')) {
+				$sessionNumbers = Session::get('numbers');
+				//first we remove the number that no longer appear in the new list
+				foreach($val in $sessionNumbers) {
+					if(array_count_value($val) > array_count_value($val)) {
+
+					}
+				}
+			}
+			else {
+
+			}*/
 			$numbers = self::bubbleSort($numbers);
+			sleep(1);
 		}
 		else {
 			return Response::json(array(

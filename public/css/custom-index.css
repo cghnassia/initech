@@ -1,3 +1,19 @@
 #sort-error {
 	display:none;
 }
+
+#sort-progress-bar {
+	transition:none;
+	width: 0px;
+}
+
+#sort-output {
+	margin-top:10px;
+}
+
+.number {
+	color: red;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 1.2em;
+}
