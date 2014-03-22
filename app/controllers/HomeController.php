@@ -46,9 +46,19 @@ class HomeController extends BaseController {
 
 	public function showSort() {
 
-		/*if (Request::isAjax() && Request::isMethod('post')) {*/
+		if (Request::isMethod('post')) {
+
 			$input = Input::get('input');
-			$numbers = preg_split('/[, -]+/', $input);
+
+			//check if the input is good (numbers with separators)
+			if(! preg_match('/^(\d+[, -]*)+$/', $input)) {
+				return Response::json(array(
+					'status' => 'error',
+					'msg' => 'wrong input'
+				));
+			}
+
+			$numbers = preg_split('/[, -]+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
 			//convert string number to int
 			for ($i = 0; $i < count($numbers); $i++) {
@@ -56,12 +66,13 @@ class HomeController extends BaseController {
 			}
 
 			$numbers = self::bubbleSort($numbers);
-		/*}
+		}
 		else {
 			return Response::json(array(
-				'status' => 'error'
+				'status' => 'error',
+				'msg' => 'malformed request'
 			));
-		}*/
+		}
 
 		return Response::json(array(
 			'status' => 'success', 

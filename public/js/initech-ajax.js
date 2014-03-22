@@ -1,8 +1,13 @@
 $(document).ready(function() {
 
+	var pattern = new RegExp(/^(\d+[, -]*)+$/);
+
 	$("#sort-input").keyup(function() {
 
 		input = $(this).val();
+		if(! pattern.test(input)) {
+			$("#sort-error").css("display", "block");
+		}
 
 		//need to check user input
 
@@ -12,7 +17,13 @@ $(document).ready(function() {
 				"input": input
 			},
 			function(data) {
-				$("#sort-output").html(data.output)
+				if(data.status == 'success') {
+					$("#sort-error").css("display", "none");
+					$("#sort-output").html(data.output);
+				}
+				else {
+					$("#sort-error").css("display", "block");
+				}
 			},
 			'json'
 		);
