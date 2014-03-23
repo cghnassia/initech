@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 		inProcess = true;
 		request = $.post(
-			'/sort/',
+			'sort',
 			{
 				"input": input
 			},
