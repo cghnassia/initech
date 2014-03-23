@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1',
-			'database'  => 'initech',
-			'username'  => 'root',
-			'password'  => '',
+			'host'      => 'us-cdbr-east-05.cleardb.net',
+			'database'  => 'heroku_604985619334351',
+			'username'  => 'baaa826f19fd95',
+			'password'  => '656e8cd4',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
