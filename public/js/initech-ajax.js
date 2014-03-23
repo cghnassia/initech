@@ -16,7 +16,7 @@ $(document).ready(function() {
 		}
 
 		//we check if the user add something relevant to sort it
-		if(! String.fromCharCode(event.keyCode).match(/\d/) || e.keyCode == 8) {
+		if(! String.fromCharCode(event.keyCode).match(/\d/) && event.keyCode != 8) {
 			return false;
 		}
 
