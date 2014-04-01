@@ -11,9 +11,9 @@ class AuthController extends BaseController {
 			$username = Request::get('username');
 			$password = Request::get('password');
 			$remember = Request::get('remember');
+			$token = Request::get('token');
 
-			if (Auth::attempt(array('username' => $username, 'password' => $password), $remember)) {
-				//return Redirect::to('/');
+			if ($token == Session::get('token') && Auth::attempt(array('username' => $username, 'password' => $password), $remember)) {
 				$status = true;
 			}
 			else {
@@ -26,7 +26,8 @@ class AuthController extends BaseController {
 			));
 		}
 		else {
-			return View::make('login', array('authenticated' => Auth::check()));
+			Session::put('token', csrf_token());
+			return View::make('login', array('authenticated' => Auth::check(), 'token' => Session::get('token')));
 		}
 
 	}

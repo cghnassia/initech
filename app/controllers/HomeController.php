@@ -40,57 +40,60 @@ class HomeController extends BaseController {
 	}
 
 	public function showIndex() {
-
-		return View::make('index', array('authenticated' => Auth::check(), 'username' => Auth::user()->username));
+		Session::put('token', csrf_token());
+		return View::make('index', array('authenticated' => Auth::check(), 'username' => Auth::user()->username, 'token' => Session::get('token')));
 	}
 
 	public function showSort() {
 
 		if (Request::isMethod('post')) {
 
-			$input = Input::get('input');
+			$input = Request::get('input');
+			$token = Request::get('token');
 
-			//check if the input is good (numbers with separators)
-			if(! preg_match('/^(\d+[, -]*)+$/', $input)) {
-				return Response::json(array(
-					'status' => 'error',
-					'msg' => 'wrong input'
-				));
-			}
+			if($token == Session::get('token')) {
 
-			$numbers = preg_split('/[, -]+/', $input, -1, PREG_SPLIT_NO_EMPTY);
+				//check if the input is good (numbers with separators)
+				if(! preg_match('/^(\d+[, -]*)+$/', $input)) {
+					return Response::json(array(
+						'status' => 'error',
+						'msg' => 'wrong input'
+					));
+				}
 
-			//convert string number to int
-			for ($i = 0; $i < count($numbers); $i++) {
-				$numbers[$i] = intval($numbers[$i]);	
-			}
+				$numbers = preg_split('/[, -]+/', $input, -1, PREG_SPLIT_NO_EMPTY);
 
-			//no we check if the user has already sorted something
-			/*if(Session::has('numbers')) {
-				$sessionNumbers = Session::get('numbers');
-				//first we remove the number that no longer appear in the new list
-				foreach($val in $sessionNumbers) {
-					if(array_count_value($val) > array_count_value($val)) {
+				//convert string number to int
+				for ($i = 0; $i < count($numbers); $i++) {
+					$numbers[$i] = intval($numbers[$i]);	
+				}
 
+				//no we check if the user has already sorted something
+				/*if(Session::has('numbers')) {
+					$sessionNumbers = Session::get('numbers');
+					//first we remove the number that no longer appear in the new list
+					foreach($val in $sessionNumbers) {
+						if(array_count_value($val) > array_count_value($val)) {
+
+						}
 					}
 				}
-			}
-			else {
+				else {
 
-			}*/
-			$numbers = self::bubbleSort($numbers);
-			sleep(1);
-		}
-		else {
-			return Response::json(array(
-				'status' => 'error',
-				'msg' => 'malformed request'
-			));
+				}*/
+				$numbers = self::bubbleSort($numbers);
+				sleep(1);
+
+				return Response::json(array(
+					'status' => 'success', 
+					'output' => json_encode($numbers)
+				));
+			}
 		}
 
 		return Response::json(array(
-			'status' => 'success', 
-			'output' => json_encode($numbers)
+			'status' => 'error',
+			'msg' => 'malformed request'
 		));
 	}
 

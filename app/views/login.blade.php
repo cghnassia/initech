@@ -14,6 +14,8 @@
 
     <h2 class="form-signin-heading">Please sign in</h2>
 
+    <input type="hidden" id="token" name="token" value="{{ $token }}">
+
     <div class="alert alert-danger alert-error" id="login-error">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>Incorrect Username or Password!</strong> .

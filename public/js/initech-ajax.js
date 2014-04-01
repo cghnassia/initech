@@ -1,84 +1,135 @@
 $(document).ready(function() {
 
-	var request;
-	var inProcess = false;
-	var pattern = new RegExp(/^(\d+[, -]*)+$/);
-	var progressbar = $("#sort-progress-bar");
+	var pattern_keyup = new RegExp(/^(\d+(\s*[,-]\s*)*)*\s*$/);
+	var pattern_submit = new RegExp(/^(\d+(\s*[,-]\s*\d+)*)+\s*$/);
 
-	$("#sort-input").keyup(function(event) {
-		//retrieve the all content
-		input = $(this).val();
+	var isRequestSort = false;
+	var isRequestLogin = false;
 
-		//need to check user input
-		if(! pattern.test(input)) {
-			$("#sort-error").css("display", "block");
-			return false;
+	if($("#input-sort").val()) {
+		keyUpHandler();
+	}
+
+	$("#input-sort").keyup(function(event) {
+		keyUpHandler();
+	});
+
+	$("#form-sort").submit(function(event) {
+		sortHandler();
+		return false;
+	});
+
+	$(".form-signin").submit(function(event) {
+		loginHandler();
+		return false;
+	});
+
+	function keyUpHandler() {
+
+		var input = $("#input-sort").val();
+
+		$("#sort-success").css("display", "none");
+		$("#sort-error").css('display', 'block');
+
+		//we test that the user entered a valid input
+		if(pattern_keyup.test(input)) {
+			$("#sort-error").css("visibility", "hidden");
+		}
+		else {
+			$("#sort-error").css("visibility", "visible");
+		}
+	}
+
+
+	function sortHandler() {
+
+		var input = $("#input-sort").val();
+		var token = $("#token").val();
+
+		$("#sort-success").css("display", "none");
+		$("#sort-error").css('display', 'block');
+
+		if(pattern_submit.test(input)) {
+			$("#sort-error").css("visibility", "hidden");
+		}
+		else {
+			$("#sort-error").css("visibility", "visible");
+			return;
 		}
 
-		//we check if the user add something relevant to sort it
-		if(! String.fromCharCode(event.keyCode).match(/\d/) && event.keyCode != 8) {
-			return false;
+		//if a request is already running, we cancel it
+		if(isRequestSort) {
+			this.request.abort();
+			$("#sort-progress-bar").stop();
 		}
 
-		progressbar.stop();
-		progressbar.css("width", "0%");
-
-		if(inProcess) {
-			request.abort();
-		}
-
-	
-		//launch progressbar
-		progressbar.animate({
+		//we start the progress bar
+		$("#sort-progress-bar").css("width", "0%");
+		$("#sort-progress-bar").animate(
+			{
 				width: "100%"
 			},
 			2000
 		);
 
-		inProcess = true;
-		request = $.post(
+		isRequestSort = true;
+		this.request = $.post(
 			'sort',
 			{
-				"input": input
+				"input": input,
+				"token": token
 			},
 			function(data) {
-				progressbar.stop();
-				progressbar.css("width", "100%");
+				$("#sort-progress-bar").stop();
+				$("#sort-progress-bar").css("width", "100%");
 
 				if(data.status == 'success') {
 					$("#sort-error").css("display", "none");
+					$("#sort-success").css('display', 'block');
 
 					output = '';
 
 					var numbers = JSON.parse(data.output);
 					for (var i in numbers) {
-						output += '<span class="number">' + numbers[i] + '</span>';
+						//output += '<span class="number">' + numbers[i] + '</span>';
+						output += numbers[i] + ', '
 					}
-					$("#sort-output").html(output);
+					//$("#sort-output").html(output);
+					$("#input-sort").val(output.substr(0, output.length - 2));
 				}
 				else {
-					$("#sort-error").css("display", "block");
+					$("#sort-error").css("visibility", "visible");
 				}
-				inProcess = false;
+				isRequestSort = false;
 			},
 			'json'
 		);
 
-		return false;
-	});
+	}
+	
+	function loginHandler() {
 
-	$(".form-signin").submit(function(event) {
-		
-		$username = $("#username").val();
-		$password = $("#password").val();
-		$remember = $("#remember").val();
+		if(isRequestLogin) {
+			return;
+		}
+
+		this.isRequestLogin = true;
+
+		username = $("#username").val();
+		password = $("#password").val();
+		remember = $("#remember").val();
+		token = $("#token").val();
+
+		$("#login-error").css("visibility", "hidden");
+		$("#login-success").css("display", "none");
 
 		$.post(
 			'/login',
 			{
-				"username": $username,
-				"password": $password,
-				"remember": $remember
+				"username": username,
+				"password": password,
+				"remember": remember,
+				"token": token
 			},
 			function(data) {
 
@@ -93,12 +144,12 @@ $(document).ready(function() {
 					);
 				}
 				else {
-					$("#login-error").css("display", "block")
+					$("#login-error").css("visibility", "visible");
 				}		
+
+				isRequestLogin = false;
 			}
 		);
-
-		return false;
-	});
+	}
 
 });
