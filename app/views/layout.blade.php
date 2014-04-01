@@ -45,8 +45,8 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="http://clement.ghnassia.com/resume.pdf">About</a></li>
+            <li><a href="mailto:clement.ghnassia@gmail.com">Contact</a></li>
           </ul>
           <form class="navbar-form navbar-right" action="/logout">
             <?php if($authenticated) { ?>

@@ -17,7 +17,7 @@
     </div>  
 
     <div class="alert alert-danger alert-error" id="sort-error">
-        <strong>Please enter numbers separated with coma</strong>
+        <strong>Please enter numbers separated by coma</strong>
     </div>
 
     <form id="form-sort" method="post" method="POST" action="/sort" accept-charset="UTF-8">
